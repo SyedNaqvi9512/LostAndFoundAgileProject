@@ -61,5 +61,80 @@ namespace Testing2
             AnFoundItems.IsReturned = TestData;
             Assert.AreEqual(AnFoundItems.IsReturned, TestData);
         }
+
+        [TestMethod]
+        public void FindMethodOK()
+        {
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            Boolean Found = false;
+            Int32 TestData = 21;
+            Found = AnFoundItems.Find(TestData);
+        }
+
+        [TestMethod]
+        public void TestIdFound()
+        {
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            Boolean Found = false;
+            Boolean OK = true;
+
+            Int32 Id = 21;
+
+            Found = AnFoundItems.Find(Id);
+
+            if (AnFoundItems.Id != 21)
+            {
+                OK = false;
+
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestTitleFound()
+        {
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 Title = 21;
+            Found = AnFoundItems.Find(Title);
+            if (AnFoundItems.Title != "Test Title")
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        
+        [TestMethod]
+        public void TestLocationFound()
+        {
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 Location = 21;
+            Found = AnFoundItems.Find(Location);
+            if (AnFoundItems.Location != "Test Location")
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        
+        [TestMethod]
+        public void TestDateAddedFound()
+        {
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 DateTime = 21;
+            Found = AnFoundItems.Find(DateTime);
+            if (AnFoundItems.DateFound != Convert.ToDateTime("23/12/2022"))
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
     }
 }
