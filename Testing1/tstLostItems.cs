@@ -76,6 +76,109 @@ namespace Testing1
             Assert.AreEqual(AnLostItems.IsClaimed, TestData);
         }
 
+        [TestMethod]
+        public void FindMethodOK()
+        {
+            clsLostItems AnLostItems = new clsLostItems();
+            Boolean Found = false;
+            Int32 TestData = 21;
+            Found = AnLostItems.Find(TestData);
+        }
+
+        [TestMethod]
+        public void TestIdFound()
+        {
+            clsLostItems AnLostItems = new clsLostItems();
+            Boolean Found = false;
+            Boolean OK = true;
+
+            Int32 Id = 21;
+
+            Found = AnLostItems.Find(Id);
+
+            if (AnLostItems.Id != 21)
+            {
+                OK = false;
+
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestTitleFound()
+        {
+            clsLostItems AnLostItems = new clsLostItems();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 Title = 21;
+            Found = AnLostItems.Find(Title);
+            if (AnLostItems.Title != "Test Title")
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestDescriptionFound()
+        {
+            clsLostItems AnLostItems = new clsLostItems();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 Description = 21;
+            Found = AnLostItems.Find(Description);
+            if (AnLostItems.Description != "Test Description")
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestLocationFound()
+        {
+            clsLostItems AnLostItems = new clsLostItems();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 Location = 21;
+            Found = AnLostItems.Find(Location);
+            if (AnLostItems.Location != "Test Location")
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestIsClaimedFound()
+        {
+            clsLostItems AnLostItems = new clsLostItems();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 IsClaimed = 21;
+            Found = AnLostItems.Find(IsClaimed);
+            if (AnLostItems.IsClaimed != "Test IsClaimed")
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestDateAddedFound()
+        {
+            clsLostItems AnLostItems = new clsLostItems();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 DateTime = 21;
+            Found = AnLostItems.Find(DateTime);
+            if (AnLostItems.DateLost != Convert.ToDateTime("23/12/2022"))
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
 
     }
 }
