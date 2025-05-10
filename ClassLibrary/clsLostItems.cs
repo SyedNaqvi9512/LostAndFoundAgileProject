@@ -13,6 +13,6 @@ namespace ClassLibrary
         public string Title { get; set; }
         public string Description { get; set; }
         public string Location { get; set; }
-        public bool IsClaimed { get; set; }
+        public string IsClaimed { get; set; }
     }
 }
