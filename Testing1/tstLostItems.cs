@@ -71,7 +71,7 @@ namespace Testing1
         {
             //create an instance of the class we want to create
             clsLostItems AnLostItems = new clsLostItems();
-            Boolean TestData = true;
+            string TestData = "yes";
             AnLostItems.IsClaimed = TestData;
             Assert.AreEqual(AnLostItems.IsClaimed, TestData);
         }
