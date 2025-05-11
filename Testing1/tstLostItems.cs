@@ -81,7 +81,7 @@ namespace Testing1
         {
             clsLostItems AnLostItems = new clsLostItems();
             Boolean Found = false;
-            Int32 TestData = 21;
+            Int32 TestData = 4;
             Found = AnLostItems.Find(TestData);
         }
 
@@ -92,11 +92,11 @@ namespace Testing1
             Boolean Found = false;
             Boolean OK = true;
 
-            Int32 Id = 21;
+            Int32 Id = 4;
 
             Found = AnLostItems.Find(Id);
 
-            if (AnLostItems.Id != 21)
+            if (AnLostItems.Id != 4)
             {
                 OK = false;
 
@@ -110,9 +110,9 @@ namespace Testing1
             clsLostItems AnLostItems = new clsLostItems();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 Title = 21;
+            Int32 Title = 4;
             Found = AnLostItems.Find(Title);
-            if (AnLostItems.Title != "Test Title")
+            if (AnLostItems.Title != "keys3lost")
             {
                 OK = false;
             }
@@ -125,9 +125,9 @@ namespace Testing1
             clsLostItems AnLostItems = new clsLostItems();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 Description = 21;
+            Int32 Description = 4;
             Found = AnLostItems.Find(Description);
-            if (AnLostItems.Description != "Test Description")
+            if (AnLostItems.Description != "lost keys 3")
             {
                 OK = false;
             }
@@ -140,9 +140,9 @@ namespace Testing1
             clsLostItems AnLostItems = new clsLostItems();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 Location = 21;
+            Int32 Location = 4;
             Found = AnLostItems.Find(Location);
-            if (AnLostItems.Location != "Test Location")
+            if (AnLostItems.Location != "lobby")
             {
                 OK = false;
             }
@@ -155,9 +155,9 @@ namespace Testing1
             clsLostItems AnLostItems = new clsLostItems();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 IsClaimed = 21;
+            Int32 IsClaimed = 4;
             Found = AnLostItems.Find(IsClaimed);
-            if (AnLostItems.IsClaimed != "Test IsClaimed")
+            if (AnLostItems.IsClaimed != "yes")
             {
                 OK = false;
             }
@@ -170,15 +170,13 @@ namespace Testing1
             clsLostItems AnLostItems = new clsLostItems();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 DateTime = 21;
+            Int32 DateTime = 4;
             Found = AnLostItems.Find(DateTime);
-            if (AnLostItems.DateLost != Convert.ToDateTime("23/12/2022"))
+            if (AnLostItems.DateLost != Convert.ToDateTime("08/09/2023 00:00:00"))
             {
                 OK = false;
             }
             Assert.IsTrue(OK);
         }
-
-
     }
 }
