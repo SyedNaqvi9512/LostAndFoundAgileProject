@@ -78,11 +78,11 @@ namespace Testing2
             Boolean Found = false;
             Boolean OK = true;
 
-            Int32 Id = 21;
+            Int32 Id = 4;
 
             Found = AnFoundItems.Find(Id);
 
-            if (AnFoundItems.Id != 21)
+            if (AnFoundItems.Id != 4)
             {
                 OK = false;
 
@@ -96,9 +96,9 @@ namespace Testing2
             clsFoundItems AnFoundItems = new clsFoundItems();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 Title = 21;
+            Int32 Title = 4;
             Found = AnFoundItems.Find(Title);
-            if (AnFoundItems.Title != "Test Title")
+            if (AnFoundItems.Title != "Keys")
             {
                 OK = false;
             }
@@ -112,9 +112,9 @@ namespace Testing2
             clsFoundItems AnFoundItems = new clsFoundItems();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 Location = 21;
+            Int32 Location = 4;
             Found = AnFoundItems.Find(Location);
-            if (AnFoundItems.Location != "Test Location")
+            if (AnFoundItems.Location != "Lobby")
             {
                 OK = false;
             }
@@ -128,12 +128,36 @@ namespace Testing2
             clsFoundItems AnFoundItems = new clsFoundItems();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 DateTime = 21;
+            Int32 DateTime = 4;
             Found = AnFoundItems.Find(DateTime);
-            if (AnFoundItems.DateFound != Convert.ToDateTime("23/12/2022"))
+            if (AnFoundItems.DateFound != Convert.ToDateTime("08/09/2024 00:00:00"))
             {
                 OK = false;
             }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestIsReturnedFound()
+        {
+            // Create an instance of the class
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            Boolean Found = false;
+            Boolean OK = true;
+
+            // Define the primary key to search for
+            Int32 Id = 4;
+
+            // Call the Find method
+            Found = AnFoundItems.Find(Id);
+
+            // Check if the IsReturned property matches the expected value
+            if (AnFoundItems.IsReturned != "Yes")
+            {
+                OK = false;
+            }
+
+            // Assert that the test passed
             Assert.IsTrue(OK);
         }
     }

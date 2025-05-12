@@ -40,16 +40,45 @@ namespace ClassLibrary
                 mDateFound = value;
             } }
 
-        public string IsReturned { get; set; }
+        string mIsReturned; 
+        public string IsReturned { 
+            get {
+                return mIsReturned;
+            } 
+            set { 
+                 mIsReturned = value; 
+            } }
 
-        public bool Find(int AddressId)
+        public bool Find(int Id)
         {
-            //set the private data members to the test data value
-            mId = 21;
-            mTitle = "Test Title";
-            mLocation = "Test Location";
-            mDateFound = Convert.ToDateTime("23/12/2022");
-            return true;
+            try
+            {
+                clsDataConnection DB = new clsDataConnection();
+                DB.AddParameter("@Id", Id);
+                DB.Execute("sproc_FoundItems_FilterById");
+
+                if (DB.Count == 1)
+                {
+                    mId = Convert.ToInt32(DB.DataTable.Rows[0]["Id"]);
+                    mTitle = Convert.ToString(DB.DataTable.Rows[0]["ItemName"]);
+                    mLocation = Convert.ToString(DB.DataTable.Rows[0]["LocationFound"]);
+                    mDateFound = Convert.ToDateTime(DB.DataTable.Rows[0]["DateFound"]);
+                    IsReturned = Convert.ToString(DB.DataTable.Rows[0]["IsReturned"]);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (optional)
+                throw new ApplicationException("An error occurred in the Find method: " + ex.Message);
+            }
         }
+
+
+
     }
 }
