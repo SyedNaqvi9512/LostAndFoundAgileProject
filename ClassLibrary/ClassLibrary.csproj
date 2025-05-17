@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="clsDataConnection.cs" />
     <Compile Include="clsFoundItems.cs" />
+    <Compile Include="clsFoundItemsCollection.cs" />
     <Compile Include="clsLostItems.cs" />
     <Compile Include="clsLostItemsCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
