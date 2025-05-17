@@ -279,7 +279,7 @@ namespace Testing1
                                              //invoke the method
             Error = AnLostItems.Valid(Title, Description, Location, DateLost, IsClaimed);
             //test to see that the result is correct
-            Assert.AreEqual(Error, "");
+            Assert.AreNotEqual(Error, "");
         }
 
         [TestMethod]
@@ -294,7 +294,7 @@ namespace Testing1
                                               //invoke the method
             Error = AnLostItems.Valid(Title, Description, Location, DateLost, IsClaimed);
             //test to see that the result is correct
-            Assert.AreEqual(Error, "");
+            Assert.AreNotEqual(Error, "");
         }
 
         [TestMethod]
@@ -381,7 +381,7 @@ namespace Testing1
                                                          //invoke the method
             Error = AnLostItems.Valid(Title, Description, Location, DateLost, IsClaimed);
             //test to see that the result is correct
-            Assert.AreEqual(Error, "");
+            Assert.AreNotEqual(Error, "");
         }
         [TestMethod]
         public void DescriptionMaxExtreme()
@@ -395,7 +395,7 @@ namespace Testing1
                                                           //invoke the method
             Error = AnLostItems.Valid(Title, Description, Location, DateLost, IsClaimed);
             //test to see that the result is correct
-            Assert.AreEqual(Error, "");
+            Assert.AreNotEqual(Error, "");
         }
 
         [TestMethod]
@@ -467,7 +467,7 @@ namespace Testing1
                                                     //invoke the method
             Error = AnLostItems.Valid(Title, Description, Location, DateLost, IsClaimed);
             //test to see that the result is correct
-            Assert.AreEqual(Error, "");
+            Assert.AreNotEqual(Error, "");
         }
         [TestMethod]
         public void DateLostExtremeMin()
@@ -530,7 +530,7 @@ namespace Testing1
             //invoke the method
             Error = AnLostItems.Valid(Title, Description, Location, DateLost, IsClaimed);
             //test to see that the result is correct
-            Assert.AreEqual(Error, "");
+            Assert.AreNotEqual(Error, "");
         }
 
         [TestMethod]
@@ -599,7 +599,7 @@ namespace Testing1
                                                                             //invoke the method
             Error = AnLostItems.Valid(Title, Description, Location, DateLost, IsClaimed);
             //test to see that the result is correct
-            Assert.AreEqual(Error, "");
+            Assert.AreNotEqual(Error, "");
         }
 
 
@@ -643,7 +643,7 @@ namespace Testing1
                                                                              //invoke the method
             Error = AnLostItems.Valid(Title, Description, Location, DateLost, IsClaimed);
             //test to see that the result is correct
-            Assert.AreEqual(Error, "");
+            Assert.AreNotEqual(Error, "");
         }
     }
 }
