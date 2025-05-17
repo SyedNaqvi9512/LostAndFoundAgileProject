@@ -149,10 +149,7 @@ namespace ClassLibrary
             try
             {
                 DateTemp = Convert.ToDateTime(dateLost);
-                if (DateTemp < DateTime.Now.Date)
-                {
-                    Error = Error + "Date cannot be in the past. ";
-                }
+                
                 if (DateTemp > DateTime.Now.Date)
                 {
                     Error = Error + "Date cannot be in the future. ";

@@ -17,12 +17,32 @@ public partial class _1_DataEntry : System.Web.UI.Page
     {
         clsLostItems AnLostItems = new clsLostItems();
         AnLostItems.Id = Convert.ToInt32(TextBoxId.Text);
-        AnLostItems.Title = TextBoxTitle.Text;
-        AnLostItems.Description = TextBoxDescription.Text;
-        AnLostItems.Location = TextBoxLocation.Text;
-        AnLostItems.IsClaimed = TextBoxIsClaimed.Text;
-        Session["AnLostItems"] = AnLostItems;
-        Response.Redirect("LostItemsViewer.aspx");
+        string Title = TextBoxTitle.Text;
+        string Description = TextBoxDescription.Text;
+        string Location = TextBoxLocation.Text;
+        string IsClaimed = TextBoxIsClaimed.Text;
+        string DateLost = TextBoxDateLost.Text;
+
+
+
+        string error = "";
+        error = AnLostItems.Valid(Title,Description,Location,DateLost,IsClaimed);
+        if (error == "")
+        {
+            AnLostItems.Id = Convert.ToInt32(TextBoxId.Text);
+            AnLostItems.Title = Title;
+            AnLostItems.Description = Description;
+            AnLostItems.Location = Location;
+            AnLostItems.DateLost = Convert.ToDateTime(DateLost);
+            AnLostItems.IsClaimed = IsClaimed;
+            Session["AnLostItems"] = AnLostItems;
+            Response.Redirect("LostItemsViewer.aspx");
+
+        }
+        else
+        {
+                       LabelError.Text = error;
+        }
     }
 
     protected void ButtonFind_Click(object sender, EventArgs e)

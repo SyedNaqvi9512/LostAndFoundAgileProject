@@ -26,8 +26,14 @@
         <td><asp:Label ID="LabelLocation" runat="server" Text="Enter Location:" /></td>
         <td><asp:TextBox ID="TextBoxLocation" runat="server" /></td>
     </tr>
+
+                <tr>
+    <td><asp:Label ID="LabelDateLost" runat="server" Text="Date lost" /></td>
+    <td><asp:TextBox ID="TextBoxDateLost" runat="server" /></td>
+</tr>
+
     <tr>
-        <td><asp:Label ID="LabelIsClaimed" runat="server" Text="Is Claimed:" /></td>
+        <td><asp:Label ID="LabelIsClaimed" runat="server" Text="Is claimed" /></td>
         <td><asp:TextBox ID="TextBoxIsClaimed" runat="server" /></td>
     </tr>
     <tr>
