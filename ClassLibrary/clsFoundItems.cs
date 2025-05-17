@@ -78,7 +78,54 @@ namespace ClassLibrary
             }
         }
 
+        public string Valid(string itemName, string locationFound, string dateFound, string isReturned)
+        {
+            string Error = "";
+            DateTime DateTemp;
 
+            if (itemName.Length == 0)
+            {
+                Error = Error + "Item Name cannot be blank. ";
+            }
 
+            if (itemName.Length > 50)
+            {
+                Error = Error + " ItemName cannot be more than 50 characters. ";
+            }
+            if (locationFound.Length == 0)
+            {
+                Error = Error + "Location cannot be blank. ";
+            }
+            if (locationFound.Length > 50)
+            {
+                Error = Error + "Location cannot be more than 50 characters. ";
+            }
+
+            if (isReturned.Length == 0)
+            {
+                Error = Error + "Is returned cannot be less than empty ";
+            }
+            if (isReturned.Length > 50)
+            {
+                Error = Error + "Is Returned cannot be more than 50 characters. ";
+            }
+
+            try
+            {
+                DateTemp = Convert.ToDateTime(dateFound);
+
+                if (DateTemp > DateTime.Now.Date)
+                {
+                    Error = Error + "Date cannot be in the future. ";
+                }
+            }
+            catch
+            {
+                Error = Error + "Invalid date format. ";
+            }
+
+            return Error;
+
+        }
     }
 }

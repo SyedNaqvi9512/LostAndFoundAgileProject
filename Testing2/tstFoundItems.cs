@@ -6,7 +6,13 @@ namespace Testing2
 {
     [TestClass]
     public class tstFoundItems
+
     {
+        string ItemName = "Keys";
+        string LocationFound = "Lobby";
+        string DateFound = DateTime.Now.ToShortDateString();
+        string IsReturned = "Yes";
+
         [TestMethod]
         public void InstanceOK()
         {
@@ -105,7 +111,7 @@ namespace Testing2
             Assert.IsTrue(OK);
         }
 
-        
+
         [TestMethod]
         public void TestLocationFound()
         {
@@ -121,7 +127,7 @@ namespace Testing2
             Assert.IsTrue(OK);
         }
 
-        
+
         [TestMethod]
         public void TestDateAddedFound()
         {
@@ -160,5 +166,346 @@ namespace Testing2
             // Assert that the test passed
             Assert.IsTrue(OK);
         }
+
+        [TestMethod]
+        public void validMethodOK()
+        {
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            String Error = "";
+            Error = AnFoundItems.Valid(ItemName, LocationFound, DateFound, IsReturned);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void ItemNameMin()
+        {
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            String Error = "";
+            string ItemName = "a";
+            Error = AnFoundItems.Valid(ItemName, LocationFound, DateFound, IsReturned);
+            Assert.AreEqual(Error, "");
+
+        }
+        [TestMethod]
+        public void ItemNameMax()
+        {
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            String Error = "";
+            string ItemName = "";
+            ItemName = ItemName.PadRight(50, 'a');
+            Error = AnFoundItems.Valid(ItemName, LocationFound, DateFound, IsReturned);
+            Assert.AreEqual(Error, "");
+        }
+        [TestMethod]
+        public void ItemNameMaxLessOne()
+        {
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            String Error = "";
+            string ItemName = "";
+            ItemName = ItemName.PadRight(49, 'a');
+            Error = AnFoundItems.Valid(ItemName, LocationFound, DateFound, IsReturned);
+            Assert.AreEqual(Error, "");
+        }
+        [TestMethod]
+        public void ItemNameMinPLusOne()
+        {
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            String Error = "";
+            string ItemName = "aa";
+            Error = AnFoundItems.Valid(ItemName, LocationFound, DateFound, IsReturned);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void ItemNameMaxPLusOne() { 
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            String Error = "";
+            string ItemName = "";
+            ItemName = ItemName.PadRight(51, 'a');
+            Error = AnFoundItems.Valid(ItemName, LocationFound, DateFound, IsReturned);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void ItemNameExtremeMax() { 
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            String Error = "";
+            string ItemName = "";
+            ItemName = ItemName.PadRight(500, 'a');
+            Error = AnFoundItems.Valid(ItemName, LocationFound, DateFound, IsReturned);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void LocationFoundMin() { 
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            String Error = "";
+            string LocationFound = "a";
+            Error = AnFoundItems.Valid(ItemName, LocationFound, DateFound, IsReturned);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void LocationFoundMax() { 
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            String Error = "";
+            string LocationFound = "";
+            LocationFound = LocationFound.PadRight(50, 'a');
+            Error = AnFoundItems.Valid(ItemName, LocationFound, DateFound, IsReturned);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void LocationFoundMaxLessOne() { 
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            String Error = "";
+            string LocationFound = "";
+            LocationFound = LocationFound.PadRight(49, 'a');
+            Error = AnFoundItems.Valid(ItemName, LocationFound, DateFound, IsReturned);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void LocationFoundExtreme() { 
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            String Error = "";
+            string LocationFound = "";
+            LocationFound = LocationFound.PadRight(500, 'a');
+            Error = AnFoundItems.Valid(ItemName, LocationFound, DateFound, IsReturned);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void LocationFoundMinPlusOne() {
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            String Error = "";
+            string LocationFound = "aa";
+            Error = AnFoundItems.Valid(ItemName, LocationFound, DateFound, IsReturned);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void LocationFoundMid() {
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            String Error = "";
+            string LocationFound = "aaa";
+            LocationFound = LocationFound.PadRight(25, 'a');
+            Error = AnFoundItems.Valid(ItemName, LocationFound, DateFound, IsReturned);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void LocationFoundMaxPlusOne() { 
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            String Error = "";
+            string LocationFound = "";
+            LocationFound = LocationFound.PadRight(51, 'a');
+            Error = AnFoundItems.Valid(ItemName, LocationFound, DateFound, IsReturned);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void IsReturnedMin() { 
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            String Error = "";
+            string IsReturned = "a";
+            Error = AnFoundItems.Valid(ItemName, LocationFound, DateFound, IsReturned);
+            Assert.AreEqual(Error, "");
+        }
+        [TestMethod]
+        public void IsReturnedMax()
+        {
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            String Error = "";
+            string IsReturned = "";
+            IsReturned = IsReturned.PadRight(50, 'a');
+            Error = AnFoundItems.Valid(ItemName, LocationFound, DateFound, IsReturned);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void IsReturnedMaxLessOne() { 
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            String Error = "";
+            string IsReturned = "";
+            IsReturned = IsReturned.PadRight(49, 'a');
+            Error = AnFoundItems.Valid(ItemName, LocationFound, DateFound, IsReturned);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void IsReturnedMaxPlusOne()
+        {
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            String Error = "";
+            string IsReturned = "";
+            IsReturned = IsReturned.PadRight(51, 'a');
+            Error = AnFoundItems.Valid(ItemName, LocationFound, DateFound, IsReturned);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void IsReturnedMinPlusOne() { 
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            String Error = "";
+            string IsReturned = "aa";
+            Error = AnFoundItems.Valid(ItemName, LocationFound, DateFound, IsReturned);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void IsReturnedExtremeMax() { 
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            String Error = "";
+            string IsReturned = "";
+            IsReturned = IsReturned.PadRight(500, 'a');
+            Error = AnFoundItems.Valid(ItemName, LocationFound, DateFound, IsReturned);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void IsReturnedMid() { 
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            String Error = "";
+            string IsReturned = "aaa";
+            IsReturned = IsReturned.PadRight(25, 'a');
+            Error = AnFoundItems.Valid(ItemName, LocationFound, DateFound, IsReturned);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void DateFoundMin()
+        {
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            //string variable to store any error message
+            String Error = "";
+            //create some test data to pass to the method
+            DateTime TestDate = DateTime.Now.Date; //this should be ok
+
+            String DateLost = TestDate.ToString();
+            //invoke the method
+            Error = AnFoundItems.Valid(ItemName, LocationFound, DateFound, IsReturned);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void DateFoundMax() {
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            //string variable to store any error message
+            String Error = "";
+            //create some test data to pass to the method
+            DateTime TestDate = DateTime.Now.Date; //this should be ok
+            String DateLost = TestDate.ToString();
+            //invoke the method
+            Error = AnFoundItems.Valid(ItemName, LocationFound, DateFound, IsReturned);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void DateFoundExtremeMax() {
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            //string variable to store any error message
+            String Error = "";
+            //create some test data to pass to the method
+            DateTime TestDate = DateTime.Now.Date; //this should be ok
+            TestDate = TestDate.AddYears(100); //this should be ok
+            String DateFound = TestDate.ToString();
+            //invoke the method
+            Error = AnFoundItems.Valid(ItemName, LocationFound, DateFound, IsReturned);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        
+
+        [TestMethod]
+        public void DateFoundMaxPlusOne()
+        {
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            //string variable to store any error message
+            String Error = "";
+            //create some test data to pass to the method
+            DateTime TestDate = DateTime.Now.Date; //this should be ok
+            TestDate = TestDate.AddDays(1); //this should be ok
+            String DateFound = TestDate.ToString();
+            //invoke the method
+            Error = AnFoundItems.Valid(ItemName, LocationFound, DateFound, IsReturned);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void IsReturendMin()
+        {
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            //string variable to store any error message
+            String Error = "";
+            //create some test data to pass to the method
+            string IsClaimed = "a"; //this should be ok
+                                    //invoke the method
+            Error = AnFoundItems.Valid(ItemName, LocationFound, DateFound, IsReturned);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void IsReturendMax() {
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            //string variable to store any error message
+            String Error = "";
+            //create some test data to pass to the method
+            string IsReturned = ""; //this should be ok
+            IsReturned = IsReturned.PadRight(50,'a');
+            //invoke the method
+            Error = AnFoundItems.Valid(ItemName, LocationFound, DateFound, IsReturned);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void IsReturnedMinPLusOne()
+        {
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            //string variable to store any error message
+            String Error = "";
+            //create some test data to pass to the method
+            string IsReturned = "aa";
+                                                       //invoke the method
+            Error = AnFoundItems.Valid(ItemName, LocationFound, DateFound, IsReturned);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void IsReturnedMaxPLusOne() {
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            //string variable to store any error message
+            String Error = "";
+            //create some test data to pass to the method
+            string IsReturned = ""; 
+            IsReturned = IsReturned.PadRight(51, 'a'); //this should be ok
+                                                                            //invoke the method
+            Error = AnFoundItems.Valid(ItemName, LocationFound, DateFound, IsReturned);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void IsReturnedExtreme() {
+            clsFoundItems AnFoundItems = new clsFoundItems();
+            //string variable to store any error message
+            String Error = "";
+            //create some test data to pass to the method
+            string IsReturned = ""; //this should be ok
+            IsReturned = IsReturned.PadRight(500, 'a'); //this should be ok
+                                                       //invoke the method
+            Error = AnFoundItems.Valid(ItemName, LocationFound, DateFound, IsReturned);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+
     }
 }
