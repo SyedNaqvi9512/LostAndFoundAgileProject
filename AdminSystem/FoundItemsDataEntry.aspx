@@ -26,6 +26,10 @@
         <td><asp:Label ID="LabelIsReturned" runat="server" Text="Is Claimed:" /></td>
         <td><asp:TextBox ID="TextBoxIsReturned" runat="server" /></td>
     </tr>
+                            <tr>
+    <td><asp:Label ID="LabelDateFound" runat="server" Text="Date Found" /></td>
+    <td><asp:TextBox ID="TextBoxDateFound" runat="server" /></td>
+</tr>
     <tr>
         <td colspan="2">
             <asp:Label ID="LabelError" runat="server" ForeColor="Red" />

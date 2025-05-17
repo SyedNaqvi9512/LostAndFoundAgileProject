@@ -15,5 +15,7 @@ public partial class _1Viewer : System.Web.UI.Page
         Response.Write(AnFoundItems.Id);
         Response.Write(AnFoundItems.Title);
         Response.Write(AnFoundItems.Location);
+        Response.Write(AnFoundItems.DateFound);
+        Response.Write(AnFoundItems.IsReturned);
     }
 }

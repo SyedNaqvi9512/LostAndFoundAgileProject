@@ -1,5 +1,6 @@
 ﻿using ClassLibrary;
 using System;
+using System.Activities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,11 +18,28 @@ public partial class _1_DataEntry : System.Web.UI.Page
     {
         clsFoundItems AnFoundItems = new clsFoundItems();
         AnFoundItems.Id = Convert.ToInt32(TextBoxId.Text);
-        AnFoundItems.Title = TextBoxTitle.Text;
-        AnFoundItems.Location = TextBoxLocation.Text;
-        AnFoundItems.IsReturned = TextBoxIsReturned.Text;
-        Session["AnFoundItems"] = AnFoundItems;
-        Response.Redirect("FoundItemsViewer.aspx");
+        string Title = TextBoxTitle.Text;
+        string Location = TextBoxLocation.Text;
+        string IsReturned = TextBoxIsReturned.Text;
+        string DateFound = TextBoxDateFound.Text;
+
+        string error = "";
+        error = AnFoundItems.Valid(Title, Location, DateFound, IsReturned);
+        if (error == "")
+        {
+            AnFoundItems.Id = Convert.ToInt32(TextBoxId.Text);
+            AnFoundItems.Title = Title;
+            AnFoundItems.Location = Location;
+            AnFoundItems.DateFound = Convert.ToDateTime(DateFound);
+            AnFoundItems.IsReturned = IsReturned;
+            Session["AnFoundItems"] = AnFoundItems;
+            Response.Redirect("FoundItemsViewer.aspx");
+
+        }
+        else
+        {
+            LabelError.Text = error;
+        }
     }
 
     protected void ButtonFind_Click(object sender, EventArgs e)
