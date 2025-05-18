@@ -5,31 +5,33 @@ namespace ClassLibrary
 {
     public class clsLostItemsCollection
     {
-        public clsLostItemsCollection() {
-            // constructor for the class
-            // create an instance of the lost items class
-            clsLostItems TestItems = new clsLostItems();
-            TestItems.Title = "Test Title";
-            TestItems.Description = "Test Description";
-            TestItems.Location = "Test Location";
-            TestItems.DateLost = DateTime.Now;
-            TestItems.IsClaimed = "No";
-            // add the test item to the list
-            mLostItemsList.Add(TestItems);
+        public clsLostItemsCollection()
+        {
+            {
+                // constructor for the class
+                clsDataConnection DB = new clsDataConnection();
+                DB.Execute("lostItems_SelectAll");
 
-            TestItems = new clsLostItems();
-            TestItems.Title = "Test Title 2";
-            TestItems.Description = "Test Description 2";
-            TestItems.Location = "Test Location 2";
-            TestItems.DateLost = DateTime.Now.Date;
-            TestItems.IsClaimed = "Yes";
-            // add the test item to the list
-            mLostItemsList.Add(TestItems);
+                Int32 Index = 0;
+                Int32 RecordCount =0;
+                RecordCount = DB.Count;
 
+                while (Index < RecordCount)
+                {
+                    clsLostItems lostItem = new clsLostItems();
+                    lostItem.Id = Convert.ToInt32(DB.DataTable.Rows[Index]["Id"]);
+                    lostItem.Title = Convert.ToString(DB.DataTable.Rows[Index]["Title"]);
+                    lostItem.Description = Convert.ToString(DB.DataTable.Rows[Index]["Description"]);
+                    lostItem.Location = Convert.ToString(DB.DataTable.Rows[Index]["Location"]);
+                    lostItem.DateLost = Convert.ToDateTime(DB.DataTable.Rows[Index]["DateLost"]);
+                    lostItem.IsClaimed = Convert.ToString(DB.DataTable.Rows[Index]["IsClaimed"]);
 
+                    mLostItemsList.Add(lostItem);
+                    Index++;
 
-
-        }
+                }
+            }
+            }
         List<clsLostItems> mLostItemsList = new List<clsLostItems>();
         public List<clsLostItems> LostItemsList { get { 
                 return mLostItemsList;
