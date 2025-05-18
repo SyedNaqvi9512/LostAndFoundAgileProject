@@ -19,7 +19,6 @@ public partial class _1_List : System.Web.UI.Page
     }
     void DisplayLostItems()
     {
-        // Create an instance of the lost items collection
         ClassLibrary.clsLostItemsCollection LostItems = new ClassLibrary.clsLostItemsCollection();
         // Set the data source to the list of lost items
         lstLostItemsList.DataSource = LostItems.LostItemsList;
