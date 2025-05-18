@@ -5,23 +5,24 @@ namespace ClassLibrary
 {
     public class clsFoundItemsCollection
     {
-        public clsFoundItemsCollection() { 
+        public clsFoundItemsCollection() {
             // constructor for the class
-            // create an instance of the found items class
-            clsFoundItems TestItems = new clsFoundItems();
-            TestItems.Title = "Test Title";
-            TestItems.Location = "Test Location";
-            TestItems.DateFound = DateTime.Now;
-            TestItems.IsReturned = "No";
-            // add the test item to the list
-            mFoundItemsList.Add(TestItems);
-            TestItems = new clsFoundItems();
-            TestItems.Title = "Test Title 2";
-            TestItems.Location = "Test Location 2";
-            TestItems.DateFound = DateTime.Now.Date;
-            TestItems.IsReturned = "Yes";
-            // add the test item to the list
-            mFoundItemsList.Add(TestItems);
+            clsDataConnection DB = new clsDataConnection();
+            DB.Execute("FoundItems_SelectAll");
+            Int32 Index = 0;
+            Int32 RecordCount = 0;
+            RecordCount = DB.Count;
+            while (Index < RecordCount)
+            {
+                clsFoundItems foundItem = new clsFoundItems();
+                foundItem.Id = Convert.ToInt32(DB.DataTable.Rows[Index]["Id"]);
+                foundItem.Title = Convert.ToString(DB.DataTable.Rows[Index]["Title"]);
+                foundItem.Location = Convert.ToString(DB.DataTable.Rows[Index]["Location"]);
+                foundItem.DateFound = Convert.ToDateTime(DB.DataTable.Rows[Index]["DateFound"]);
+                foundItem.IsReturned = Convert.ToString(DB.DataTable.Rows[Index]["IsReturned"]);
+                mFoundItemsList.Add(foundItem);
+                Index++;
+            }
         }
 
         List<clsFoundItems> mFoundItemsList = new List<clsFoundItems>();
