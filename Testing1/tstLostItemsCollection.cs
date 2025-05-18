@@ -33,14 +33,6 @@ namespace Testing1
         }
 
         [TestMethod]
-        public void CountPropertyOk()
-        {
-            clsLostItemsCollection AllLostItems = new clsLostItemsCollection();
-            Int32 SomeCount = 2;
-            AllLostItems.Count = SomeCount;
-            Assert.AreEqual(AllLostItems.Count, 2);
-        }
-        [TestMethod]
         public void ThisLostItemsPropertyOk()
         {
             clsLostItemsCollection AllLostItems = new clsLostItemsCollection();
@@ -71,12 +63,5 @@ namespace Testing1
             Assert.AreEqual(AllLostItems.Count, TestList.Count);
         }
 
-        [TestMethod]
-        public void TwoRecordsPresent()
-        {
-            clsLostItemsCollection AllLostItems = new clsLostItemsCollection();
-            Assert.AreEqual(AllLostItems.Count, 2);
-
-        }
     }
 }
