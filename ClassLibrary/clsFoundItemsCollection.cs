@@ -16,8 +16,8 @@ namespace ClassLibrary
             {
                 clsFoundItems foundItem = new clsFoundItems();
                 foundItem.Id = Convert.ToInt32(DB.DataTable.Rows[Index]["Id"]);
-                foundItem.Title = Convert.ToString(DB.DataTable.Rows[Index]["Title"]);
-                foundItem.Location = Convert.ToString(DB.DataTable.Rows[Index]["Location"]);
+                foundItem.Title = Convert.ToString(DB.DataTable.Rows[Index]["itemName"]);
+                foundItem.Location = Convert.ToString(DB.DataTable.Rows[Index]["LocationFound"]);
                 foundItem.DateFound = Convert.ToDateTime(DB.DataTable.Rows[Index]["DateFound"]);
                 foundItem.IsReturned = Convert.ToString(DB.DataTable.Rows[Index]["IsReturned"]);
                 mFoundItemsList.Add(foundItem);

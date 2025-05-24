@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel.Channels;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -28,5 +29,13 @@ public partial class _1_List : System.Web.UI.Page
         lstLostItemsList.DataTextField = "Title";
         // Bind the data to the list box
         lstLostItemsList.DataBind();
+    }
+
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        Session["LostItemsId"] = -1; // Set the session variable to -1 to indicate a new item
+        // Redirect to the LostItemsDataEntry page
+        Response.Redirect("LostItemsDataEntry.aspx");
+
     }
 }
