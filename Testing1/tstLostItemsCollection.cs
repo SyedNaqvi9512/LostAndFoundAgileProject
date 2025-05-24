@@ -122,9 +122,30 @@ namespace Testing1
             Assert.AreEqual(AllLostItems.ThisLostItems, TestItem);
 
         }
+        [TestMethod]
+        public void DeleteMethodOK()
+        {
+            clsLostItemsCollection AllLostItems = new clsLostItemsCollection();
+            clsLostItems TestItem = new clsLostItems();
+            Int32 PrimaryKey = 0;
+            TestItem.Id = 1;
+            TestItem.Title = "Test Title";
+            TestItem.Description = "Test Description";
+            TestItem.Location = "Test Location";
+            TestItem.DateLost = DateTime.Now.Date;
+            TestItem.IsClaimed = "No";
+            AllLostItems.ThisLostItems = TestItem;
+            PrimaryKey = AllLostItems.Add();
+            TestItem.Id = PrimaryKey;
+            AllLostItems.LostItemsList.Add(TestItem);
+            AllLostItems.ThisLostItems.Find(PrimaryKey);
+            AllLostItems.Delete();
+            Boolean Found = AllLostItems.ThisLostItems.Find(PrimaryKey);
+            Assert.IsFalse(Found);
+        }
 
-        
-          
+
+
 
     }
 }

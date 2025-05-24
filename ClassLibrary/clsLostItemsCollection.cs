@@ -87,5 +87,13 @@ namespace ClassLibrary
             DB.AddParameter("@IsClaimed", mThisLostItems.IsClaimed);
             DB.Execute("sproc_lostItems_Update");
         }
+
+        public void Delete()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@Id", mThisLostItems.Id);
+            DB.Execute("sproc_lostItems_Delete");
+
+        }
     }
 }
