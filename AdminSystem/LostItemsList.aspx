@@ -14,7 +14,10 @@
             
             <asp:Button ID="btnUpdate" runat="server" Text="Update" OnClick="btnUpdate_Click" />
             <asp:Button ID="btnDelete" runat="server" Text="Delete" OnClick="btnDelete_Click" />
-            <asp:Label ID="LblError" runat="server" ForeColor="Red" />
+            
+            <asp:TextBox ID="txtFilterTitle" runat="server" />
+<asp:Button ID="btnFilter" runat="server" Text="Filter" OnClick="btnFilter_Click" />
+            <asp:Label ID="LablError" runat="server" ForeColor="Red" />
            
           
         </div>

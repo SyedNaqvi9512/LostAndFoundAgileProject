@@ -79,4 +79,17 @@ public partial class _1_List : System.Web.UI.Page
         }
 
     }
+
+    protected void btnFilter_Click(object sender, EventArgs e)
+    {
+     
+        string filterTitle = txtFilterTitle.Text.Trim();
+        ClassLibrary.clsLostItemsCollection collection = new ClassLibrary.clsLostItemsCollection();
+        collection.ReportByTitle(filterTitle);
+        lstLostItemsList.DataSource = collection.LostItemsList;
+        lstLostItemsList.DataValueField = "Id";
+        lstLostItemsList.DataTextField = "Title";
+        lstLostItemsList.DataBind();
+    
+}
 }
