@@ -38,4 +38,24 @@ public partial class _1_List : System.Web.UI.Page
         // Redirect to the data entry page
         Response.Redirect("FoundItemsDataEntry.aspx");
     }
+
+    protected void btnEdit_Click(object sender, EventArgs e)
+    {
+        // Check if an item is selected
+        if (lstFoundItemsList.SelectedIndex != -1)
+        {
+            // Get the selected item ID
+            int FoundItemsId = Convert.ToInt32(lstFoundItemsList.SelectedValue);
+            // Store the ID in the session variable
+            Session["FoundItemsId"] = FoundItemsId;
+            // Redirect to the data entry page
+            Response.Redirect("FoundItemsDataEntry.aspx");
+        }
+        else
+        {
+            // Display a message if no item is selected
+            LblError.Text = "Please select an item to edit.";
+        }
+
+    }
 }

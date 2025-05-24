@@ -143,6 +143,14 @@ namespace Testing1
             Boolean Found = AllLostItems.ThisLostItems.Find(PrimaryKey);
             Assert.IsFalse(Found);
         }
+        [TestMethod]
+        public void ReportByTitleMethodOK()
+        {
+            clsLostItemsCollection AllLostItems = new clsLostItemsCollection();
+            clsLostItemsCollection FilteredList = new clsLostItemsCollection();
+            FilteredList.ReportByTitle("");
+            Assert.AreEqual(AllLostItems.Count, FilteredList.Count);
+        }
 
 
 

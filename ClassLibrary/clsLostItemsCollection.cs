@@ -95,5 +95,31 @@ namespace ClassLibrary
             DB.Execute("sproc_lostItems_Delete");
 
         }
+
+        
+        public void ReportByTitle(string v)
+        {
+            // filter the records based on a title
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@Title", v);
+            DB.Execute("sproc_lostItems_FilterByTitle");
+            // clear the current list
+            mLostItemsList.Clear();
+            // populate the list with the filtered records
+            Int32 Index = 0;
+            Int32 RecordCount = DB.Count;
+            while (Index < RecordCount)
+            {
+                clsLostItems lostItem = new clsLostItems();
+                lostItem.Id = Convert.ToInt32(DB.DataTable.Rows[Index]["Id"]);
+                lostItem.Title = Convert.ToString(DB.DataTable.Rows[Index]["Title"]);
+                lostItem.Description = Convert.ToString(DB.DataTable.Rows[Index]["Description"]);
+                lostItem.Location = Convert.ToString(DB.DataTable.Rows[Index]["Location"]);
+                lostItem.DateLost = Convert.ToDateTime(DB.DataTable.Rows[Index]["DateLost"]);
+                lostItem.IsClaimed = Convert.ToString(DB.DataTable.Rows[Index]["IsClaimed"]);
+                mLostItemsList.Add(lostItem);
+                Index++;
+            }
+        }
     }
 }
