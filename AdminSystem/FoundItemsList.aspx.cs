@@ -29,4 +29,13 @@ public partial class _1_List : System.Web.UI.Page
         // Bind the data to the list box
         lstFoundItemsList.DataBind();
     }
+
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        //session variable to indicate a new item
+        Session["FoundItemsId"] = -1; // Set the session variable to -1 to indicate a new item
+
+        // Redirect to the data entry page
+        Response.Redirect("FoundItemsDataEntry.aspx");
+    }
 }

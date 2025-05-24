@@ -84,5 +84,29 @@ namespace Testing2
             Assert.AreEqual(AllFoundItems.Count, TestList.Count);
         }
 
+        [TestMethod]
+        public void AddMethodOK()
+        {
+            // Create an instance of the class we want to test
+            clsFoundItemsCollection AllFoundItems = new clsFoundItemsCollection();
+            // Create some test data to assign to the property
+            clsFoundItems TestItem = new clsFoundItems();
+            Int32 PrimaryKey = 0;
+            // Set its properties
+            TestItem.Id = 1;
+            TestItem.Title = "Test Title";
+            TestItem.Location = "Test Location";
+            TestItem.DateFound = DateTime.Now.Date;
+            TestItem.IsReturned = "No";
+            // Assign the data to the property
+            AllFoundItems.ThisFoundItems = TestItem;
+            // Add the item to the collection
+             PrimaryKey = AllFoundItems.Add();
+            // Set the primary key of the test item
+            TestItem.Id = PrimaryKey;
+            // Test that the two values are the same
+            Assert.AreEqual(AllFoundItems.ThisFoundItems, TestItem);
+        }
+
     }
 }
