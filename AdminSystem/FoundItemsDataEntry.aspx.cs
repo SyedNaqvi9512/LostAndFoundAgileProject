@@ -17,23 +17,55 @@ public partial class _1_DataEntry : System.Web.UI.Page
     protected void ButtonOk_Click(object sender, EventArgs e)
     {
         clsFoundItems AnFoundItems = new clsFoundItems();
-        AnFoundItems.Id = Convert.ToInt32(TextBoxId.Text);
+        int id;
+        // Validate Id input
+        if (!int.TryParse(TextBoxId.Text, out id))
+        {
+            LabelError.Text = "Please enter a valid numeric Id.";
+            return;
+        }
+        AnFoundItems.Id = id;
+
         string Title = TextBoxTitle.Text;
         string Location = TextBoxLocation.Text;
         string IsReturned = TextBoxIsReturned.Text;
         string DateFound = TextBoxDateFound.Text;
 
-        string error = "";
-        error = AnFoundItems.Valid(Title, Location, DateFound, IsReturned);
+        // Validate using your business logic
+        string error = AnFoundItems.Valid(Title, Location, DateFound, IsReturned);
+
+        // Additional date validation for UI
+        DateTime parsedDate;
         if (error == "")
         {
-            AnFoundItems.Id = Convert.ToInt32(TextBoxId.Text);
+            if (!DateTime.TryParse(DateFound, out parsedDate))
+            {
+                LabelError.Text = "Please enter a valid date.";
+                return;
+            }
+            if (parsedDate < new DateTime(1753, 1, 1) || parsedDate > new DateTime(9999, 12, 31))
+            {
+                LabelError.Text = "Date must be between 01/01/1753 and 12/31/9999.";
+                return;
+            }
+            if (parsedDate > DateTime.Now.Date)
+            {
+                LabelError.Text = "Date cannot be in the future.";
+                return;
+            }
+
             AnFoundItems.Title = Title;
             AnFoundItems.Location = Location;
-            AnFoundItems.DateFound = Convert.ToDateTime(DateFound);
+            AnFoundItems.DateFound = parsedDate;
             AnFoundItems.IsReturned = IsReturned;
+
+            // Add the item to the collection
+            clsFoundItemsCollection AnFoundItemsCollection = new clsFoundItemsCollection();
+            AnFoundItemsCollection.ThisFoundItems = AnFoundItems;
+            AnFoundItemsCollection.Add();
             Session["AnFoundItems"] = AnFoundItems;
             Response.Redirect("FoundItemsViewer.aspx");
+
 
         }
         else
