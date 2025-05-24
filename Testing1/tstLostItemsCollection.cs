@@ -83,6 +83,48 @@ namespace Testing1
             AllLostItems.LostItemsList.Add(TestItem);
             Assert.AreEqual(AllLostItems.ThisLostItems, TestItem);
         }
+        [TestMethod]
+        public void UpdateMethodOK()
+        {
+            clsLostItemsCollection AllLostItems = new clsLostItemsCollection();
+
+            // Create a new lost item for test
+            clsLostItems TestItem = new clsLostItems();
+            Int32 PrimaryKey = 0;
+
+            // Set initial properties
+            TestItem.Title = "Original Title";
+            TestItem.Description = "Original Description";
+            TestItem.Location = "Original Location";
+            TestItem.DateLost = DateTime.Now.Date;
+            TestItem.IsClaimed = "No";
+
+            // Assign and add the record
+            AllLostItems.ThisLostItems = TestItem;
+            PrimaryKey = AllLostItems.Add();
+            TestItem.Id = PrimaryKey;
+
+            // Modify the test item
+            TestItem.Title = "Updated Title";
+            TestItem.Description = "Updated Description";
+            TestItem.Location = "Updated Location";
+            TestItem.DateLost = DateTime.Now.Date; // optional to update
+            TestItem.IsClaimed = "Yes";
+
+            // Update the record
+            AllLostItems.ThisLostItems = TestItem;
+            AllLostItems.Update();
+
+            // Find the updated record
+            AllLostItems.ThisLostItems.Find(PrimaryKey);
+
+            // Assert that the record was updated successfully
+            Assert.AreEqual(AllLostItems.ThisLostItems, TestItem);
+
+        }
+
+        
+          
 
     }
 }
