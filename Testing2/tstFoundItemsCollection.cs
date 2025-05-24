@@ -108,5 +108,32 @@ namespace Testing2
             Assert.AreEqual(AllFoundItems.ThisFoundItems, TestItem);
         }
 
+        [TestMethod]
+        public void DeleteMethodOK()
+        {
+            // Create an instance of the class we want to test
+            clsFoundItemsCollection AllFoundItems = new clsFoundItemsCollection();
+            // Create some test data to assign to the property
+            clsFoundItems TestItem = new clsFoundItems();
+            Int32 PrimaryKey = 0;
+            // Set its properties
+            TestItem.Title = "Test Title";
+            TestItem.Location = "Test Location";
+            TestItem.DateFound = DateTime.Now.Date;
+            TestItem.IsReturned = "No";
+            // Assign the data to the property
+            AllFoundItems.ThisFoundItems = TestItem;
+            // Add the item to the collection
+            PrimaryKey = AllFoundItems.Add();
+            // Set the primary key of the test item
+            TestItem.Id = PrimaryKey;
+            // Assign the modified item back to the collection
+            AllFoundItems.ThisFoundItems = TestItem;
+            // Delete the record from the database
+            AllFoundItems.Delete();
+            // Check that it no longer exists in the collection
+            Assert.AreNotEqual(AllFoundItems.ThisFoundItems, TestItem);
+        }
+
     }
 }
