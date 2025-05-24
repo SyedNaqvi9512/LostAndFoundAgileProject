@@ -65,5 +65,18 @@ namespace ClassLibrary
             //execute the stored procedure
             return DB.Execute("sproc_FoundItems_Insert");
         }
+
+        public void Update()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            //set the parameters for the stored procedure
+            DB.AddParameter("@Id", mThisFoundItems.Id);
+            DB.AddParameter("@itemName", mThisFoundItems.Title);
+            DB.AddParameter("@LocationFound", mThisFoundItems.Location);
+            DB.AddParameter("@DateFound", mThisFoundItems.DateFound);
+            DB.AddParameter("@IsReturned", mThisFoundItems.IsReturned);
+            //execute the stored procedure
+            DB.Execute("sproc_FoundItems_Update");
+        }
     }
 }

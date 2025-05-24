@@ -107,6 +107,36 @@ namespace Testing2
             // Test that the two values are the same
             Assert.AreEqual(AllFoundItems.ThisFoundItems, TestItem);
         }
+        [TestMethod]
+        public void UpdateMethodOK()
+        {
+            // Create an instance of the class we want to test
+            clsFoundItemsCollection AllFoundItems = new clsFoundItemsCollection();
+            // Create some test data to assign to the property
+            clsFoundItems TestItem = new clsFoundItems();
+            Int32 PrimaryKey = 0;
+            // Set initial properties
+            TestItem.Title = "Original Title";
+            TestItem.Location = "Original Location";
+            TestItem.DateFound = DateTime.Now.Date;
+            TestItem.IsReturned = "No";
+            // Assign and add the record
+            AllFoundItems.ThisFoundItems = TestItem;
+            PrimaryKey = AllFoundItems.Add();
+            // Set the primary key of the test item
+            TestItem.Id = PrimaryKey;
+            // Modify the properties
+            TestItem.Title = "Updated Title";
+            TestItem.Location = "Updated Location";
+            TestItem.DateFound = DateTime.Now.Date;
+            TestItem.IsReturned = "Yes";
+            // Assign the modified item back to the collection
+            AllFoundItems.ThisFoundItems = TestItem;
+            // Update the record in the database
+            AllFoundItems.Update();
+            // Test that the two values are the same
+            Assert.AreEqual(AllFoundItems.ThisFoundItems, TestItem);
+        }
 
     }
 }

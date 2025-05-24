@@ -9,9 +9,34 @@ using System.Web.UI.WebControls;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    Int32 Id;
     protected void Page_Load(object sender, EventArgs e)
     {
+        // Get the Id from the session variable
+        Id = Convert.ToInt32(Session["FoundItemsId"]);
+        if (IsPostBack == false)
+        {
+            // If this is not a new record, display the current data
+            if (Id != -1)
+            {
+                DisplayFoundItems();
+            }
+        }
 
+    }
+
+    private void DisplayFoundItems()
+    {
+        // Create an instance of the found items class
+        clsFoundItems AnFoundItems = new clsFoundItems();
+        // Find the record using the Id
+        AnFoundItems.Find(Id);
+        // Display the data in the textboxes
+        TextBoxId.Text = AnFoundItems.Id.ToString();
+        TextBoxTitle.Text = AnFoundItems.Title;
+        TextBoxLocation.Text = AnFoundItems.Location;
+        TextBoxDateFound.Text = AnFoundItems.DateFound.ToString("yyyy-MM-dd");
+        TextBoxIsReturned.Text = AnFoundItems.IsReturned;
     }
 
     protected void ButtonOk_Click(object sender, EventArgs e)
@@ -58,11 +83,31 @@ public partial class _1_DataEntry : System.Web.UI.Page
             AnFoundItems.Location = Location;
             AnFoundItems.DateFound = parsedDate;
             AnFoundItems.IsReturned = IsReturned;
-
+            
             // Add the item to the collection
             clsFoundItemsCollection AnFoundItemsCollection = new clsFoundItemsCollection();
             AnFoundItemsCollection.ThisFoundItems = AnFoundItems;
             AnFoundItemsCollection.Add();
+            //if this is a new record  , Id = -1 then add the data
+            if (Id == -1)
+            {
+                //set the ThisFoundItem property
+                AnFoundItemsCollection.ThisFoundItems = AnFoundItems;
+
+                // Set the Id to the newly added record's Id
+                AnFoundItems.Id = AnFoundItemsCollection.ThisFoundItems.Id;
+            }
+            else
+            {
+
+                // Find the record to update
+                AnFoundItemsCollection.ThisFoundItems.Find(Id);
+                // Set the ThisFoundItems property to the new data
+                AnFoundItemsCollection.ThisFoundItems = AnFoundItems;
+                // Update the existing record
+                AnFoundItemsCollection.Update();
+            }
+
             Session["AnFoundItems"] = AnFoundItems;
             Response.Redirect("FoundItemsViewer.aspx");
 
