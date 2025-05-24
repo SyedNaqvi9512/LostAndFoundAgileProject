@@ -38,4 +38,25 @@ public partial class _1_List : System.Web.UI.Page
         Response.Redirect("LostItemsDataEntry.aspx");
 
     }
+
+    protected void btnUpdate_Click(object sender, EventArgs e)
+    {
+        Int32 lostItemsID;
+        if (lstLostItemsList.SelectedIndex != -1) 
+        {
+            // Get the primary key value of the selected item
+            lostItemsID = Convert.ToInt32(lstLostItemsList.SelectedValue);
+            // Store the primary key in the session variable
+            Session["LostItemsId"] = lostItemsID;
+            // Redirect to the LostItemsDataEntry page
+            Response.Redirect("LostItemsDataEntry.aspx");
+        }
+        else
+        {
+            // Display a message if no item is selected
+            LabelError.Text = "Please select an item to update.";
+
+        }
+
+    }
 }

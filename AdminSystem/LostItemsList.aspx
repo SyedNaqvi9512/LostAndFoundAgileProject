@@ -11,6 +11,11 @@
         <div>
             <asp:ListBox ID="lstLostItemsList" runat="server"></asp:ListBox>
             <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+            
+            <asp:Button ID="btnUpdate" runat="server" Text="Update" OnClick="btnUpdate_Click" />
+            <asp:Label ID="LabelError" runat="server" ForeColor="Red" />
+           
+          
         </div>
     </form>
 </body>

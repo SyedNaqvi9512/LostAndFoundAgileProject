@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -8,10 +9,36 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    Int32 LostItemsId;
     protected void Page_Load(object sender, EventArgs e)
     {
+        // Get the Id from the session variable
+        LostItemsId = Convert.ToInt32(Session["LostItemsId"]);
+        if (!IsPostBack)
+        {
+            // If the Id is not -1, it means we are editing an existing item
+            if (LostItemsId != -1)
+            {
+                DisplayLostItems();
+            }
+        }
 
     }
+    void DisplayLostItems()
+    {
+        // Create an instance of the clsLostItems class
+        clsLostItems AnLostItems = new clsLostItems();
+        // Find the record based on the Id
+        AnLostItems.Find(LostItemsId);
+        // Populate the textboxes with the data from the record
+        TextBoxId.Text = AnLostItems.Id.ToString();
+        TextBoxTitle.Text = AnLostItems.Title;
+        TextBoxDescription.Text = AnLostItems.Description;
+        TextBoxLocation.Text = AnLostItems.Location;
+        TextBoxDateLost.Text = AnLostItems.DateLost.ToString("yyyy-MM-dd");
+        TextBoxIsClaimed.Text = AnLostItems.IsClaimed;
+    }
+
 
     protected void ButtonOk_Click(object sender, EventArgs e)
     {
@@ -38,6 +65,27 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
             // Create a new instance of the collection
             clsLostItemsCollection AnLostItemsCollection = new clsLostItemsCollection();
+            // If the Id is -1, it means we are adding a new item
+            AnLostItemsCollection.ThisLostItems = AnLostItems;
+            if (LostItemsId == -1)
+            {
+                //set the thisLostItems property
+                AnLostItemsCollection.ThisLostItems = AnLostItems;
+
+
+                // Add a new item to the collection
+                AnLostItemsCollection.Add();
+            }
+            else
+            {
+                //find record to update
+                AnLostItemsCollection.ThisLostItems.Find(LostItemsId);
+                //set the ThisLostItems property
+                AnLostItemsCollection.ThisLostItems = AnLostItems;
+
+                // Update the existing item in the collection
+                AnLostItemsCollection.Update();
+            }
             // Set the ThisLostItems property to the new item
             AnLostItemsCollection.ThisLostItems = AnLostItems;
             // Add the item to the collection
@@ -79,5 +127,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
             // Display an error message if no record is found
             LabelError.Text = "Record not found.";
         }
+
+        
     }
 }

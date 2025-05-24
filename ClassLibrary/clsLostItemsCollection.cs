@@ -75,5 +75,17 @@ namespace ClassLibrary
             DB.AddParameter("@IsClaimed", mThisLostItems.IsClaimed);
             return DB.Execute("sproc_lostItems_Insert");
         }
+
+        public void Update()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@Id", mThisLostItems.Id);
+            DB.AddParameter("@Title", mThisLostItems.Title);
+            DB.AddParameter("@Description", mThisLostItems.Description);
+            DB.AddParameter("@Location", mThisLostItems.Location);
+            DB.AddParameter("@DateLost", mThisLostItems.DateLost);
+            DB.AddParameter("@IsClaimed", mThisLostItems.IsClaimed);
+            DB.Execute("sproc_lostItems_Update");
+        }
     }
 }
