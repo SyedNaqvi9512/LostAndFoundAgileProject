@@ -11,6 +11,8 @@
         <div>
             <asp:ListBox ID="lstFoundItemsList" runat="server"></asp:ListBox>
             <asp:Button ID="btnAdd" runat="server" Text="AddBtn" OnClick="btnAdd_Click" />
+            <asp:Button ID="btnEdit" runat="server" Text="EditBtn" OnClick="btnEdit_Click" style="height: 26px" />
+             <asp:Label ID="LblError" runat="server" ForeColor="Red" />
         </div>
     </form>
 </body>
