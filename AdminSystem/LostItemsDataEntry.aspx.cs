@@ -35,6 +35,14 @@ public partial class _1_DataEntry : System.Web.UI.Page
             AnLostItems.Location = Location;
             AnLostItems.DateLost = Convert.ToDateTime(DateLost);
             AnLostItems.IsClaimed = IsClaimed;
+
+            // Create a new instance of the collection
+            clsLostItemsCollection AnLostItemsCollection = new clsLostItemsCollection();
+            // Set the ThisLostItems property to the new item
+            AnLostItemsCollection.ThisLostItems = AnLostItems;
+            // Add the item to the collection
+            AnLostItemsCollection.Add();
+
             Session["AnLostItems"] = AnLostItems;
             Response.Redirect("LostItemsViewer.aspx");
 
