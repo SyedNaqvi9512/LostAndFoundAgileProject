@@ -54,8 +54,28 @@ public partial class _1_List : System.Web.UI.Page
         else
         {
             // Display a message if no item is selected
-            LabelError.Text = "Please select an item to update.";
+            LblError.Text = "Please select an item to update.";
 
+        }
+
+    }
+
+    protected void btnDelete_Click(object sender, EventArgs e)
+    {
+        Int32 lostItemsID;
+        if (lstLostItemsList.SelectedIndex != -1)
+        {
+            // Get the primary key value of the selected item
+            lostItemsID = Convert.ToInt32(lstLostItemsList.SelectedValue);
+            // Store the primary key in the session variable
+            Session["LostItemsId"] = lostItemsID;
+            // Redirect to the LostItemsDataEntry page
+            Response.Redirect("LostItemsConfirmDelete.aspx");
+        }
+        else
+        {
+            // Display a message if no item is selected
+            LblError.Text = "Please select an item to delete.";
         }
 
     }

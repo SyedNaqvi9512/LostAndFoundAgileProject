@@ -9,11 +9,12 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:ListBox ID="lstLostItemsList" runat="server"></asp:ListBox>
+            <asp:ListBox ID="tlstLostItemsList" runat="server"></asp:ListBox>
             <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
             
             <asp:Button ID="btnUpdate" runat="server" Text="Update" OnClick="btnUpdate_Click" />
-            <asp:Label ID="LabelError" runat="server" ForeColor="Red" />
+            <asp:Button ID="btnDelete" runat="server" Text="Delete" OnClick="btnDelete_Click" />
+            <asp:Label ID="LblError" runat="server" ForeColor="Red" />
            
           
         </div>
