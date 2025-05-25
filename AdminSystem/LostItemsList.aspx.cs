@@ -54,7 +54,7 @@ public partial class _1_List : System.Web.UI.Page
         else
         {
             // Display a message if no item is selected
-            LblError.Text = "Please select an item to update.";
+            LablError.Text = "Please select an item to update.";
 
         }
 
@@ -75,7 +75,7 @@ public partial class _1_List : System.Web.UI.Page
         else
         {
             // Display a message if no item is selected
-            LblError.Text = "Please select an item to delete.";
+            LablError.Text = "Please select an item to delete.";
         }
 
     }
