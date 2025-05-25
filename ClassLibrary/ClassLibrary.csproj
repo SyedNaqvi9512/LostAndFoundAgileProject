@@ -46,6 +46,7 @@
     <Compile Include="clsFoundItemsCollection.cs" />
     <Compile Include="clsLostItems.cs" />
     <Compile Include="clsLostItemsCollection.cs" />
+    <Compile Include="clsLostItemsUsers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
