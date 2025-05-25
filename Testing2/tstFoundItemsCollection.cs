@@ -161,8 +161,8 @@ namespace Testing2
             AllFoundItems.ThisFoundItems = TestItem;
             // Delete the record from the database
             AllFoundItems.Delete();
-            // Check that it no longer exists in the collection
-            Assert.AreNotEqual(AllFoundItems.ThisFoundItems, TestItem);
+            Boolean Found = AllFoundItems.ThisFoundItems.Find(PrimaryKey);
+            Assert.IsFalse(Found);
         }
 
     }

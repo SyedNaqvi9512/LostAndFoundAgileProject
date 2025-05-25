@@ -78,5 +78,14 @@ namespace ClassLibrary
             //execute the stored procedure
             DB.Execute("sproc_FoundItems_Update");
         }
+
+        public void Delete()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            //set the parameters for the stored procedure
+            DB.AddParameter("@Id", mThisFoundItems.Id);
+            //execute the stored procedure
+            DB.Execute("sproc_FoundItems_Delete");
+        }
     }
 }

@@ -54,7 +54,27 @@ public partial class _1_List : System.Web.UI.Page
         else
         {
             // Display a message if no item is selected
-            LblError.Text = "Please select an item to edit.";
+            LablError.Text = "Please select an item to edit.";
+        }
+
+    }
+
+    protected void btnDelete_Click(object sender, EventArgs e)
+    {
+        // Check if an item is selected
+        if (lstFoundItemsList.SelectedIndex != -1)
+        {
+            // Get the selected item ID
+            int FoundItemsId = Convert.ToInt32(lstFoundItemsList.SelectedValue);
+            // Store the ID in the session variable
+            Session["FoundItemsId"] = FoundItemsId;
+            // Redirect to the delete confirmation page
+            Response.Redirect("FoundItemsDelete.aspx");
+        }
+        else
+        {
+            // Display a message if no item is selected
+            LablError.Text = "Please select an item to delete.";
         }
 
     }
