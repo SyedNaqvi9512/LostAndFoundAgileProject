@@ -52,6 +52,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="tstFoundItems.cs" />
     <Compile Include="tstFoundItemsCollection.cs" />
+    <Compile Include="tstLostItemsUsers.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
