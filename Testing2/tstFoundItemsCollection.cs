@@ -40,7 +40,7 @@ namespace Testing2
             Assert.AreEqual(AllFoundItems.FoundItemsList, TestList);
         }
 
-        
+
 
         [TestMethod]
         public void ThisFoundItemsPropertyOk()
@@ -101,7 +101,7 @@ namespace Testing2
             // Assign the data to the property
             AllFoundItems.ThisFoundItems = TestItem;
             // Add the item to the collection
-             PrimaryKey = AllFoundItems.Add();
+            PrimaryKey = AllFoundItems.Add();
             // Set the primary key of the test item
             TestItem.Id = PrimaryKey;
             // Test that the two values are the same
@@ -164,6 +164,28 @@ namespace Testing2
             Boolean Found = AllFoundItems.ThisFoundItems.Find(PrimaryKey);
             Assert.IsFalse(Found);
         }
+        [TestMethod]
+        public void ReportByTitleMethodOK()
+        {
+            clsFoundItemsCollection collection = new clsFoundItemsCollection();
+            string testTitle = "Test"; // Use a substring that should match at least one item in your DB
 
-    }
+            // Act
+            collection.ReportByTitle(testTitle);
+
+            // Assert: All returned items should contain the testTitle substring in their Title
+            bool allMatch = true;
+            foreach (var item in collection.FoundItemsList)
+            {
+                if (!item.Title.Contains(testTitle))
+                {
+                    allMatch = false;
+                    break;
+                }
+            }
+            Assert.IsTrue(allMatch);
+        }
+        
+
+    } 
 }

@@ -27,7 +27,7 @@ namespace ClassLibrary
                     lostItem.Location = Convert.ToString(DB.DataTable.Rows[Index]["Location"]);
                     lostItem.DateLost = Convert.ToDateTime(DB.DataTable.Rows[Index]["DateLost"]);
                     lostItem.IsClaimed = Convert.ToString(DB.DataTable.Rows[Index]["IsClaimed"]);
-
+                   
                     mLostItemsList.Add(lostItem);
                     Index++;
 

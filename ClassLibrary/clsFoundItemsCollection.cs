@@ -21,6 +21,7 @@ namespace ClassLibrary
                 foundItem.DateFound = Convert.ToDateTime(DB.DataTable.Rows[Index]["DateFound"]);
                 foundItem.IsReturned = Convert.ToString(DB.DataTable.Rows[Index]["IsReturned"]);
                 mFoundItemsList.Add(foundItem);
+
                 Index++;
             }
         }
@@ -87,5 +88,32 @@ namespace ClassLibrary
             //execute the stored procedure
             DB.Execute("sproc_FoundItems_Delete");
         }
+
+        public void ReportByTitle(string v)
+        {
+            clsDataConnection DB = new clsDataConnection();
+            //add the parameter for the title to search for
+            DB.AddParameter("@itemName", v); // <-- Corrected parameter name
+                                             //execute the stored procedure
+            DB.Execute("sproc_FoundItems_FilterByTitle");
+            //clear the current list of found items
+            mFoundItemsList.Clear();
+            //populate the list with the records returned from the database
+            Int32 Index = 0;
+            Int32 RecordCount = 0;
+            RecordCount = DB.Count;
+            while (Index < RecordCount)
+            {
+                clsFoundItems foundItem = new clsFoundItems();
+                foundItem.Id = Convert.ToInt32(DB.DataTable.Rows[Index]["Id"]);
+                foundItem.Title = Convert.ToString(DB.DataTable.Rows[Index]["itemName"]);
+                foundItem.Location = Convert.ToString(DB.DataTable.Rows[Index]["LocationFound"]);
+                foundItem.DateFound = Convert.ToDateTime(DB.DataTable.Rows[Index]["DateFound"]);
+                foundItem.IsReturned = Convert.ToString(DB.DataTable.Rows[Index]["IsReturned"]);
+                mFoundItemsList.Add(foundItem);
+                Index++;
+            }
+
+            }
     }
 }
