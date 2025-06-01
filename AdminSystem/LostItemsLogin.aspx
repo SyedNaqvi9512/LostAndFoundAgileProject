@@ -12,12 +12,12 @@
             <h2>Login</h2>
 
             <asp:Label ID="lblUsername" runat="server" Text="Username:" AssociatedControlID="txtUsername" /><br />
-            <asp:TextBox ID="txtUsername" runat="server" Width="100%" /><br /><br />
+            <asp:TextBox ID="txtUsername" runat="server" /><br /><br />
 
             <asp:Label ID="lblPassword" runat="server" Text="Password:" AssociatedControlID="txtPassword" /><br />
-            <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" Width="100%" /><br /><br />
+            <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" /><br /><br />
 
-            <asp:Button ID="btnLogin" runat="server" Text="Login" OnClick="btnLogin_Click" Width="100%" /><br /><br />
+            <asp:Button ID="btnLogin" runat="server" Text="Login" OnClick="btnLogin_Click" /><br /><br />
 
             <asp:Label ID="lblMessage" runat="server" ForeColor="Red" />
            

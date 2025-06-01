@@ -82,14 +82,33 @@ public partial class _1_List : System.Web.UI.Page
 
     protected void btnFilter_Click(object sender, EventArgs e)
     {
-     
-        string filterTitle = txtFilterTitle.Text.Trim();
-        ClassLibrary.clsLostItemsCollection collection = new ClassLibrary.clsLostItemsCollection();
-        collection.ReportByTitle(filterTitle);
+        string filter = txtFilterTitle.Text.Trim();
+        var collection = new ClassLibrary.clsLostItemsCollection();
+
+        int id;
+        if (int.TryParse(filter, out id))
+        {
+            // Filter by ID
+            collection.ReportById(id);
+        }
+        else
+        {
+            // Filter by Title
+            collection.ReportByTitle(filter);
+        }
+
         lstLostItemsList.DataSource = collection.LostItemsList;
         lstLostItemsList.DataValueField = "Id";
         lstLostItemsList.DataTextField = "Title";
         lstLostItemsList.DataBind();
-    
-}
+
+    }
+
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        txtFilterTitle.Text = ""; // Clear the filter textbox
+        DisplayLostItems();       // Reload all items into the ListBox
+        LablError.Text = "";      // Optionally clear any error messages
+
+    }
 }
