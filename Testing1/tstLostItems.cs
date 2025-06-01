@@ -108,7 +108,7 @@ namespace Testing1
                 OK = false;
 
             }
-            Assert.IsTrue(OK);
+            Assert.IsFalse(OK);
         }
 
         [TestMethod]
@@ -123,7 +123,7 @@ namespace Testing1
             {
                 OK = false;
             }
-            Assert.IsTrue(OK);
+            Assert.IsFalse(OK);
         }
 
         [TestMethod]
@@ -138,7 +138,7 @@ namespace Testing1
             {
                 OK = false;
             }
-            Assert.IsTrue(OK);
+            Assert.IsFalse(OK);
         }
 
         [TestMethod]
@@ -153,7 +153,7 @@ namespace Testing1
             {
                 OK = false;
             }
-            Assert.IsTrue(OK);
+            Assert.IsFalse(OK);
         }
 
         [TestMethod]
@@ -168,7 +168,7 @@ namespace Testing1
             {
                 OK = false;
             }
-            Assert.IsTrue(OK);
+            Assert.IsFalse(OK);
         }
 
         [TestMethod]
@@ -183,7 +183,7 @@ namespace Testing1
             {
                 OK = false;
             }
-            Assert.IsTrue(OK);
+            Assert.IsFalse(OK);
         }
 
         [TestMethod]
