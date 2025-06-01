@@ -115,5 +115,26 @@ namespace ClassLibrary
             }
 
             }
+        public void ReportById(int id)
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@Id", id);
+            DB.Execute("sproc_FoundItems_FilterById");
+            mFoundItemsList.Clear();
+            int Index = 0;
+            int RecordCount = DB.Count;
+            while (Index < RecordCount)
+            {
+                clsFoundItems foundItem = new clsFoundItems();
+                foundItem.Id = Convert.ToInt32(DB.DataTable.Rows[Index]["Id"]);
+                foundItem.Title = Convert.ToString(DB.DataTable.Rows[Index]["itemName"]);
+                foundItem.Location = Convert.ToString(DB.DataTable.Rows[Index]["LocationFound"]);
+                foundItem.DateFound = Convert.ToDateTime(DB.DataTable.Rows[Index]["DateFound"]);
+                foundItem.IsReturned = Convert.ToString(DB.DataTable.Rows[Index]["IsReturned"]);
+                mFoundItemsList.Add(foundItem);
+                Index++;
+            }
+        }
+
     }
 }

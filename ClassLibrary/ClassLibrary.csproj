@@ -44,6 +44,7 @@
     <Compile Include="clsDataConnection.cs" />
     <Compile Include="clsFoundItems.cs" />
     <Compile Include="clsFoundItemsCollection.cs" />
+    <Compile Include="clsFoundItemsUsers.cs" />
     <Compile Include="clsLostItems.cs" />
     <Compile Include="clsLostItemsCollection.cs" />
     <Compile Include="clsLostItemsUsers.cs" />
