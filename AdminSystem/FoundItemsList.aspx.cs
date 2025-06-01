@@ -69,7 +69,7 @@ public partial class _1_List : System.Web.UI.Page
             // Store the ID in the session variable
             Session["FoundItemsId"] = FoundItemsId;
             // Redirect to the delete confirmation page
-            Response.Redirect("FoundItemsDelete.aspx");
+            Response.Redirect("FoundItemsConfirmDelete.aspx");
         }
         else
         {
@@ -81,12 +81,36 @@ public partial class _1_List : System.Web.UI.Page
 
     protected void btnFilter_Click(object sender, EventArgs e)
     {
-        string filterTitle = txtFilterTitle.Text.Trim();
+        string filter = txtFilterTitle.Text.Trim();
         ClassLibrary.clsFoundItemsCollection collection = new ClassLibrary.clsFoundItemsCollection();
-        collection.ReportByTitle(filterTitle);
+
+        int id;
+        if (int.TryParse(filter, out id))
+        {
+            // Filter by ID
+            collection.ReportById(id);
+        }
+        else
+        {
+            // Show validation error if not a valid ID
+            LablError.Text = "Please enter a valid numeric Id to filter.";
+            return;
+        }
+
         lstFoundItemsList.DataSource = collection.FoundItemsList;
         lstFoundItemsList.DataValueField = "Id";
         lstFoundItemsList.DataTextField = "Title";
         lstFoundItemsList.DataBind();
+    }
+
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        // Clear the filter text box
+        txtFilterTitle.Text = string.Empty;
+        // Re-display all found items
+        DisplayFoundItems();
+        // Clear any error messages
+        LablError.Text = string.Empty;
+
     }
 }

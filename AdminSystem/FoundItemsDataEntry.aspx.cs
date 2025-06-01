@@ -41,9 +41,9 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
     protected void ButtonOk_Click(object sender, EventArgs e)
     {
+
         clsFoundItems AnFoundItems = new clsFoundItems();
         int id;
-        // Validate Id input
         if (!int.TryParse(TextBoxId.Text, out id))
         {
             LabelError.Text = "Please enter a valid numeric Id.";
@@ -56,10 +56,8 @@ public partial class _1_DataEntry : System.Web.UI.Page
         string IsReturned = TextBoxIsReturned.Text;
         string DateFound = TextBoxDateFound.Text;
 
-        // Validate using your business logic
         string error = AnFoundItems.Valid(Title, Location, DateFound, IsReturned);
 
-        // Additional date validation for UI
         DateTime parsedDate;
         if (error == "")
         {
@@ -83,35 +81,23 @@ public partial class _1_DataEntry : System.Web.UI.Page
             AnFoundItems.Location = Location;
             AnFoundItems.DateFound = parsedDate;
             AnFoundItems.IsReturned = IsReturned;
-            
-            // Add the item to the collection
+
             clsFoundItemsCollection AnFoundItemsCollection = new clsFoundItemsCollection();
             AnFoundItemsCollection.ThisFoundItems = AnFoundItems;
-            AnFoundItemsCollection.Add();
-            //if this is a new record  , Id = -1 then add the data
+
             if (Id == -1)
             {
-                //set the ThisFoundItem property
-                AnFoundItemsCollection.ThisFoundItems = AnFoundItems;
-
-                // Set the Id to the newly added record's Id
-                AnFoundItems.Id = AnFoundItemsCollection.ThisFoundItems.Id;
+                // Add new item
+                AnFoundItemsCollection.Add();
             }
             else
             {
-
-                // Find the record to update
-                AnFoundItemsCollection.ThisFoundItems.Find(Id);
-                // Set the ThisFoundItems property to the new data
-                AnFoundItemsCollection.ThisFoundItems = AnFoundItems;
-                // Update the existing record
+                // Update existing item
                 AnFoundItemsCollection.Update();
             }
 
             Session["AnFoundItems"] = AnFoundItems;
             Response.Redirect("FoundItemsViewer.aspx");
-
-
         }
         else
         {
@@ -134,6 +120,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
                 TextBoxTitle.Text = AnFoundItems.Title;
                 TextBoxLocation.Text = AnFoundItems.Location;
                 TextBoxIsReturned.Text = AnFoundItems.IsReturned;
+                TextBoxDateFound.Text = AnFoundItems.DateFound.ToString("yyyy-MM-dd");
                 LabelError.Text = ""; // Clear any previous error messages
             }
             else
