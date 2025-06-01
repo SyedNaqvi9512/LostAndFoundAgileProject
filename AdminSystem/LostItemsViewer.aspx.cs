@@ -10,12 +10,23 @@ public partial class _1Viewer : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        clsLostItems AnLostItems = new clsLostItems();
-        AnLostItems = (clsLostItems)Session["AnLostItems"];
-        Response.Write(AnLostItems.Id);
-        Response.Write(AnLostItems.Title);
-        Response.Write(AnLostItems.Description); 
-        Response.Write(AnLostItems.Location);
-        Response.Write(AnLostItems.IsClaimed);
+        if (!IsPostBack)
+        {
+            clsLostItems AnLostItems = Session["AnLostItems"] as clsLostItems;
+            if (AnLostItems != null)
+            {
+                lblId.Text = AnLostItems.Id.ToString();
+                lblTitle.Text = AnLostItems.Title;
+                lblDescription.Text = AnLostItems.Description;
+                lblLocation.Text = AnLostItems.Location;
+                lblDateLost.Text = AnLostItems.DateLost.ToString("yyyy-MM-dd");
+                lblIsClaimed.Text = AnLostItems.IsClaimed;
+            }
+        }
+    }
+
+    protected void btnList_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("LostItemsList.aspx");
     }
 }

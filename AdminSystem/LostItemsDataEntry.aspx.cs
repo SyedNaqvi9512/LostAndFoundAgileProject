@@ -12,17 +12,40 @@ public partial class _1_DataEntry : System.Web.UI.Page
     Int32 LostItemsId;
     protected void Page_Load(object sender, EventArgs e)
     {
-        // Get the Id from the session variable
-        LostItemsId = Convert.ToInt32(Session["LostItemsId"]);
+        if (!IsPostBack && Request.UrlReferrer == null)
+        {
+            // If the page is loaded directly (not via redirect), clear the session variable
+            Session["LostItemsId"] = null;
+        }
+        int id;
+        if (Session["LostItemsId"] != null && int.TryParse(Session["LostItemsId"].ToString(), out id))
+        {
+            LostItemsId = id;
+        }
+        else
+        {
+            LostItemsId = -1;
+        }
+
         if (!IsPostBack)
         {
-            // If the Id is not -1, it means we are editing an existing item
+            // Only display if editing an existing item
             if (LostItemsId != -1)
             {
                 DisplayLostItems();
             }
+            else
+            {
+                // Clear all textboxes for a new entry
+                TextBoxId.Text = "";
+                TextBoxTitle.Text = "";
+                TextBoxDescription.Text = "";
+                TextBoxLocation.Text = "";
+                TextBoxDateLost.Text = "";
+                TextBoxIsClaimed.Text = "";
+                LabelError.Text = "";
+            }
         }
-
     }
     void DisplayLostItems()
     {
@@ -42,92 +65,93 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
     protected void ButtonOk_Click(object sender, EventArgs e)
     {
-        clsLostItems AnLostItems = new clsLostItems();
-        AnLostItems.Id = Convert.ToInt32(TextBoxId.Text);
-        string Title = TextBoxTitle.Text;
-        string Description = TextBoxDescription.Text;
-        string Location = TextBoxLocation.Text;
-        string IsClaimed = TextBoxIsClaimed.Text;
-        string DateLost = TextBoxDateLost.Text;
 
-
-
-        string error = "";
-        error = AnLostItems.Valid(Title,Description,Location,DateLost,IsClaimed);
-        if (error == "")
+        // Validate if the entered Id is a valid integer
+        int id;
+        if (!int.TryParse(TextBoxId.Text, out id))
         {
-            AnLostItems.Id = Convert.ToInt32(TextBoxId.Text);
-            AnLostItems.Title = Title;
-            AnLostItems.Description = Description;
-            AnLostItems.Location = Location;
-            AnLostItems.DateLost = Convert.ToDateTime(DateLost);
-            AnLostItems.IsClaimed = IsClaimed;
+            LabelError.Text = "Please enter a valid numeric Id.";
+            return;
+        }
 
-            // Create a new instance of the collection
-            clsLostItemsCollection AnLostItemsCollection = new clsLostItemsCollection();
-            // If the Id is -1, it means we are adding a new item
-            AnLostItemsCollection.ThisLostItems = AnLostItems;
-            if (LostItemsId == -1)
-            {
-                //set the thisLostItems property
-                AnLostItemsCollection.ThisLostItems = AnLostItems;
+        // Gather input values
+        string title = TextBoxTitle.Text;
+        string description = TextBoxDescription.Text;
+        string location = TextBoxLocation.Text;
+        string dateLost = TextBoxDateLost.Text;
+        string isClaimed = TextBoxIsClaimed.Text;
 
+        // Create and validate the lost item
+        clsLostItems lostItem = new clsLostItems();
+        string error = lostItem.Valid(title, description, location, dateLost, isClaimed);
 
-                // Add a new item to the collection
-                AnLostItemsCollection.Add();
-            }
-            else
-            {
-                //find record to update
-                AnLostItemsCollection.ThisLostItems.Find(LostItemsId);
-                //set the ThisLostItems property
-                AnLostItemsCollection.ThisLostItems = AnLostItems;
+        if (error != "")
+        {
+            LabelError.Text = error;
+            return;
+        }
 
-                // Update the existing item in the collection
-                AnLostItemsCollection.Update();
-            }
-            // Set the ThisLostItems property to the new item
-            AnLostItemsCollection.ThisLostItems = AnLostItems;
-            // Add the item to the collection
-            AnLostItemsCollection.Add();
+        // Assign values to the lost item
+        lostItem.Id = id;
+        lostItem.Title = title;
+        lostItem.Description = description;
+        lostItem.Location = location;
+        lostItem.DateLost = Convert.ToDateTime(dateLost);
+        lostItem.IsClaimed = isClaimed;
 
-            Session["AnLostItems"] = AnLostItems;
-            Response.Redirect("LostItemsViewer.aspx");
+        // Create the collection and set the current item
+        clsLostItemsCollection collection = new clsLostItemsCollection();
+        collection.ThisLostItems = lostItem;
 
+        if (LostItemsId == -1)
+        {
+            // Add new item
+            collection.Add();
         }
         else
         {
-                       LabelError.Text = error;
+            // Update existing item
+            collection.Update();
         }
+
+        // Store in session and redirect
+        Session["AnLostItems"] = lostItem;
+        Response.Redirect("LostItemsViewer.aspx");
     }
 
     protected void ButtonFind_Click(object sender, EventArgs e)
     {
         clsLostItems AnLostItems = new clsLostItems();
-        Int32 Id;
-        Boolean Found = false;
+        int Id;
+        bool Found = false;
 
-        // Convert the entered Id from the TextBox
-        Id = Convert.ToInt32(TextBoxId.Text);
-
-        // Call the Find method
-        Found = AnLostItems.Find(Id);
-
-        // If a record is found, populate the textboxes
-        if (Found == true)
+        // Validate if the entered Id is a valid integer
+        if (int.TryParse(TextBoxId.Text, out Id))
         {
-            TextBoxTitle.Text = AnLostItems.Title;
-            TextBoxDescription.Text = AnLostItems.Description;
-            TextBoxLocation.Text = AnLostItems.Location;
-            TextBoxIsClaimed.Text = AnLostItems.IsClaimed;
-            TextBoxId.Text = AnLostItems.Id.ToString();
+            // Call the Find method
+            Found = AnLostItems.Find(Id);
+
+            // If a record is found, populate the textboxes
+            if (Found)
+            {
+                TextBoxTitle.Text = AnLostItems.Title;
+                TextBoxDescription.Text = AnLostItems.Description;
+                TextBoxLocation.Text = AnLostItems.Location;
+                TextBoxIsClaimed.Text = AnLostItems.IsClaimed;
+                TextBoxId.Text = AnLostItems.Id.ToString();
+                TextBoxDateLost.Text = AnLostItems.DateLost.ToString("yyyy-MM-dd");
+                LabelError.Text = "";
+            }
+            else
+            {
+                // Display an error message if no record is found
+                LabelError.Text = "Record not found.";
+            }
         }
         else
         {
-            // Display an error message if no record is found
-            LabelError.Text = "Record not found.";
+            // Show a validation error if ID is missing or invalid
+            LabelError.Text = "Please enter a valid numeric Id.";
         }
-
-        
     }
-}
+    }
